@@ -1,6 +1,8 @@
 FROM busybox:musl AS bb
 FROM alpine:edge
 
+RUN apk add --no-cache strace
+
 # see: https://fastest.fish/test-files
 COPY 1MiB.bin 1.544MiB.bin sums.txt /
 COPY --from=bb /bin/busybox /bin/busybox
@@ -13,7 +15,7 @@ RUN set -eux; \
   while true; do \
   printf '%s\n' *.bin \
   | grep -F -f - sums.txt \
-  | sha256sum -w -s -c - \
+  | strace sha256sum -w -s -c - \
   || break; \
   i=$(( i + 1 )); \
   done; \
