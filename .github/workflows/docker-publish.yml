@@ -59,9 +59,7 @@ jobs:
 
       - name: Set a core pattern
         run: |
-          whoami
-          echo "core-%e.%p.%t" > /proc/sys/kernel/core_pattern
-          ulimit -c unlimited
+          sudo 'echo "core-%e.%p.%t" >/proc/sys/kernel/core_pattern'
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
