@@ -6,9 +6,12 @@ COPY 1MiB.bin 1.544MiB.bin sums.txt /
 RUN set -eux; \
   cat /proc/cpuinfo; \
   ulimit -c unlimited; \
-  # only check the sum of the files that are present
+  i=0; \
+  while true; do \
   printf '%s\n' *.bin \
   | grep -F -f - sums.txt \
   | sha256sum -w -s -c - \
-  || :
-
+  || break; \
+  i=$(( i + 1 )); \
+  done; \
+  echo "died on iteration ${i}"; \
