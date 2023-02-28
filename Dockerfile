@@ -9,14 +9,13 @@ COPY --from=bb /bin/busybox /bin/busybox
 
 RUN set -eux; \
   /bin/busybox --install /bin; \
-  cat /proc/cpuinfo; \
+  cat /proc/cpuinfo;
+
+RUN set -eux; \
   ulimit -c unlimited; \
   i=0; \
   while true; do \
-  printf '%s\n' *.bin \
-  | grep -F -f - sums.txt \
-  | strace sha256sum -w -s -c - \
-  || break; \
-  i=$(( i + 1 )); \
+    strace sha256sum *.bin || break; \
+    i=$(( i + 1 )); \
   done; \
   echo "died on iteration ${i}"; \
