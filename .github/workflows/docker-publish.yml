@@ -57,6 +57,11 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: latest=true
 
+      - name: Set a core pattern
+        run: |
+          echo "core-%e.%p.%t" > /proc/sys/kernel/core_pattern
+          ulimit -c unlimited
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
