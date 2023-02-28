@@ -59,7 +59,7 @@ jobs:
 
       - name: Set a core pattern
         run: |
-          sudo 'echo "core-%e.%p.%t" >/proc/sys/kernel/core_pattern'
+          sudo sh -c 'echo "core-%e.%p.%t" >/proc/sys/kernel/core_pattern'
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
