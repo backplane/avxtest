@@ -1,9 +1,11 @@
-FROM busybox:musl
+#FROM busybox:musl
+FROM alpine:edge
 
 # see: https://fastest.fish/test-files
 COPY 1MiB.bin 1.544MiB.bin sums.txt /
 
 RUN set -eux; \
+  #/bin/busybox --install /bin; \
   cat /proc/cpuinfo; \
   ulimit -c unlimited; \
   i=0; \
