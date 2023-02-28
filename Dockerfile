@@ -13,9 +13,4 @@ RUN set -eux; \
 
 RUN set -eux; \
   ulimit -c unlimited; \
-  i=0; \
-  while true; do \
-    strace sha256sum *.bin || break; \
-    i=$(( i + 1 )); \
-  done; \
-  echo "died on iteration ${i}"; \
+  strace sha256sum *.bin || echo "fail"
