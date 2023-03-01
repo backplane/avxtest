@@ -8,5 +8,5 @@ RUN cat /proc/cpuinfo;
 
 RUN set -eux; \
   ulimit -c unlimited; \
-  sha256sum *.bin && false
+  ! sha256sum *.bin
   # the goal to is get crash cores, if we didn't crash then we fail the build
