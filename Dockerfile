@@ -4,8 +4,6 @@ FROM ${BASE}
 # see: https://fastest.fish/test-files
 COPY 1MiB.bin 1.544MiB.bin sums.txt /
 
-RUN 
-
 RUN set -eux; \
   ulimit -c unlimited; \
   ! sha256sum *.bin
