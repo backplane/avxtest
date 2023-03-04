@@ -4,6 +4,10 @@ FROM backplane/busybox:1.36.0-shani-patch
 # see: https://fastest.fish/test-files
 COPY 1MiB.bin 1.544MiB.bin sums.txt /
 
+RUN set -eux;
+  # we know the problem hardware, let's just fail unless we're testing on it
+  grep -E '8171M|8272CL' /proc/cpuinfo
+
 RUN set -eux; \
   ulimit -c unlimited; \
   ! sha256sum *.bin
