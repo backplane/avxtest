@@ -1,5 +1,5 @@
 ARG BASE=backplane/busybox:1.36.0-shani-patch
-FROM ${BASE}
+FROM backplane/busybox:1.36.0-shani-patch
 
 # see: https://fastest.fish/test-files
 COPY 1MiB.bin 1.544MiB.bin sums.txt /
