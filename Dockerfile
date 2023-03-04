@@ -1,4 +1,4 @@
-ARG BASE=busybox:musl
+ARG BASE=backplane/busybox:1.36.0-shani-patch
 FROM ${BASE}
 
 # see: https://fastest.fish/test-files
